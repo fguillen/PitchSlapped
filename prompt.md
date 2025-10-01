@@ -25,9 +25,10 @@ EMAIL INSTRUCTIONS:
 10. Suggest a subject line that signals trust/curiosity (include “Lufthansa”).
 11. Generate a plausible contact email for [CONTACT_NAME] based on public domain email patterns for [COMPANY_NAME].
 
-OUTPUT FORMAT:
-- Subject Line: [suggestion]
-- Email Text: [body, paragraphs, formal language]
-- Contact Email: [generated plausible address]
+OUTPUT REQUIREMENTS:
+- Generate a plausible email address for the contact based on company domain patterns
+- Create a compelling subject line that includes "Lufthansa" and builds curiosity/trust
+- Write the complete email body with professional, soft language
+- Ensure the response is highly tailored, trust-building, and never pushy—focused on curiosity and value discovery
 
-Ensure the response is highly tailored, trust-building, and never pushy—focused on curiosity and value discovery.
+The response will be automatically structured with the contact information and generated content.

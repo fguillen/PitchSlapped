@@ -82,19 +82,27 @@ The script now requests structured JSON responses from the LLM and generates a m
 ---
 ```
 
-### JSON Structure
-The LLM is instructed to return data in this JSON format:
-```json
-{
-  "company_name": "Company Name",
-  "industry": "Industry Sector",
-  "contact_name": "Contact Person",
-  "contact_linkedin": "LinkedIn URL",
-  "inferred_email": "generated.email@company.com",
-  "subject": "Email Subject Line",
-  "body": "Complete email body text"
+### Structured Response Schema
+The script uses RubyLLM's Schema feature with a hash-based schema definition to ensure consistent, structured responses from the LLM:
+
+```ruby
+EMAIL_RESPONSE_SCHEMA = {
+  type: 'object',
+  properties: {
+    company_name: { type: 'string' },
+    industry: { type: 'string' },
+    contact_name: { type: 'string' },
+    contact_linkedin: { type: 'string' },
+    inferred_email: { type: 'string' },
+    subject: { type: 'string' },
+    body: { type: 'string' }
+  },
+  required: %w[company_name industry contact_name contact_linkedin inferred_email subject body],
+  additionalProperties: false
 }
 ```
+
+This guarantees that each response contains all required fields in the correct format, eliminating parsing errors and ensuring data consistency.
 
 ## Configuration
 
