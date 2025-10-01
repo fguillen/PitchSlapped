@@ -8,10 +8,12 @@ gemfile do
   source "https://rubygems.org"
   gem "ruby_llm", require: "ruby_llm"
   gem "csv"
+  gem "dotenv"
 end
 
 require "csv"
 require "ruby_llm"
+require "dotenv/load"
 
 class EmailGenerator
   def initialize(api_key:, csv_file:, output_file:, prompt_file:)

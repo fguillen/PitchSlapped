@@ -34,3 +34,5 @@ We are asking for 30mins talk.
 Suggest a subject that generates trust and curiosity. Include Lufthansa in the subject.
 
 Call to Action: let us know if you are open for a short call
+
+For each contact generate a pausible email address. Try to infere it from the email structure of other emails that are public for this company.
