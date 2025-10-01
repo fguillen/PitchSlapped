@@ -64,7 +64,7 @@ company_name,industry,contact_name,contact_linkedin
 
 ## Output Format
 
-The script generates a markdown file with the following structure for each contact:
+The script now requests structured JSON responses from the LLM and generates a markdown file with the following structure for each contact:
 
 ```markdown
 # Email to: [Contact Name]
@@ -73,12 +73,27 @@ The script generates a markdown file with the following structure for each conta
 - **Industry:** [Industry]
 - **Contact:** [Contact Name]
 - **LinkedIn:** [LinkedIn URL]
+- **Inferred Email:** [Generated Email Address]
 
 ## [Email Subject]
 
 [Email Body]
 
 ---
+```
+
+### JSON Structure
+The LLM is instructed to return data in this JSON format:
+```json
+{
+  "company_name": "Company Name",
+  "industry": "Industry Sector",
+  "contact_name": "Contact Person",
+  "contact_linkedin": "LinkedIn URL",
+  "inferred_email": "generated.email@company.com",
+  "subject": "Email Subject Line",
+  "body": "Complete email body text"
+}
 ```
 
 ## Configuration

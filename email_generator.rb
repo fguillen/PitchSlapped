@@ -14,6 +14,7 @@ end
 require "csv"
 require "ruby_llm"
 require "dotenv/load"
+require "json"
 
 class EmailGenerator
   def initialize(api_key:, csv_file:, output_file:, prompt_file:)
@@ -92,15 +93,15 @@ class EmailGenerator
         end
 
         # Generate email for this contact
-        email_content = generate_email_for_contact(row)
+        email_data = generate_email_for_contact(row)
 
-        if email_content == "Error generating email content"
+        if email_data.nil?
           error_count += 1
           next
         end
 
         # Write to markdown file
-        write_email_to_markdown(output, row, email_content)
+        write_email_to_markdown(output, email_data)
         processed_count += 1
       end
     end
@@ -135,46 +136,63 @@ class EmailGenerator
     begin
       # Send request to LLM using RubyLLM
       response = @client.ask(personalized_prompt)
-      response.content || "Error generating email content"
+      raw_content = response.content || "Error generating email content"
+
+      # Parse JSON response
+      parse_json_response(raw_content, row)
     rescue => e
       puts "Error generating email for #{row["contact_name"]}: #{e.message}"
-      "Error generating email content"
+      nil
     end
   end
 
-  def write_email_to_markdown(output, row, email_content)
-    output.puts "# Email to: #{row["contact_name"]}\n"
-    output.puts "- **Company:** #{row["company_name"]}"
-    output.puts "- **Industry:** #{row["industry"]}"
-    output.puts "- **Contact:** #{row["contact_name"]}"
-    output.puts "- **LinkedIn:** #{row["contact_linkedin"]}\n"
+  def parse_json_response(content, fallback_row)
+    # Try to extract JSON from the response
+    json_match = content.match(/```json\s*({.*?})\s*```/m) || content.match(/({.*})/m)
 
-    # Parse email content to extract subject and body
-    subject, body = parse_email_content(email_content)
+    if json_match
+      json_string = json_match[1]
+      begin
+        parsed_data = JSON.parse(json_string)
 
-    output.puts "## #{subject}\n"
-    output.puts "#{body}\n"
+        # Validate required fields
+        required_fields = ["company_name", "industry", "contact_name", "contact_linkedin", "inferred_email", "subject", "body"]
+        if required_fields.all? { |field| parsed_data.key?(field) }
+          return parsed_data
+        else
+          puts "Warning: JSON response missing required fields for #{fallback_row['contact_name']}"
+        end
+      rescue JSON::ParserError => e
+        puts "Warning: Failed to parse JSON for #{fallback_row['contact_name']}: #{e.message}"
+      end
+    end
+
+    # Fallback: create structure from original data
+    {
+      "company_name" => fallback_row["company_name"],
+      "industry" => fallback_row["industry"],
+      "contact_name" => fallback_row["contact_name"],
+      "contact_linkedin" => fallback_row["contact_linkedin"],
+      "inferred_email" => "#{fallback_row['contact_name'].downcase.gsub(' ', '.')}@#{fallback_row['company_name'].downcase.gsub(' ', '')}.com",
+      "subject" => "Partnership Opportunity: Lufthansa Innovation Hub",
+      "body" => content.gsub(/```json.*?```/m, '').strip
+    }
+  end
+
+  def write_email_to_markdown(output, email_data)
+    output.puts "# Email to: #{email_data["contact_name"]}\n"
+    output.puts "- **Company:** #{email_data["company_name"]}"
+    output.puts "- **Industry:** #{email_data["industry"]}"
+    output.puts "- **Contact:** #{email_data["contact_name"]}"
+    output.puts "- **LinkedIn:** #{email_data["contact_linkedin"]}"
+    output.puts "- **Inferred Email:** #{email_data["inferred_email"]}\n"
+
+    output.puts "## #{email_data["subject"]}\n"
+    output.puts "#{email_data["body"]}\n"
     output.puts "---\n"
   end
 
-  def parse_email_content(content)
-    # Try to extract subject line (usually starts with "Subject:" or is on first line)
-    lines = content.split("\n").map(&:strip).reject(&:empty?)
 
-    subject_line = lines.find { |line| line.downcase.start_with?("subject:") }
-
-    if subject_line
-      subject = subject_line.sub(/^subject:\s*/i, "")
-      body_start_index = lines.index(subject_line) + 1
-      body = lines[body_start_index..-1].join("\n\n")
-    else
-      # If no explicit subject line, use first line as subject and rest as body
-      subject = lines.first || "Follow-up from Lufthansa Innovation Hub"
-      body = lines[1..-1]&.join("\n\n") || content
-    end
-
-    [subject, body]
-  end
 end
 
 # Main execution
