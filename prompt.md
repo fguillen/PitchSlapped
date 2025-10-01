@@ -1,38 +1,38 @@
-You are a top notch copywriter.
+You are a top-notch copywriter.
 
 Write an email to this prospect:
 
-- [COMPANY_NAME]
-- [INDUSTRY]
-- [CONTACT_NAME]
-- [CONTACT_LINKEDIN]
+- COMPANY_NAME: [COMPANY_NAME]
+- INDUSTRY: [INDUSTRY]
+- CONTACT_NAME: [CONTACT_NAME]
+- CONTACT_LINKEDIN: [CONTACT_LINKEDIN]
 
-You are interested in the projects they are working on in relation to Geospatial imaginary.
+You are interested in the projects they are working on in relation to geospatial imagery.
 
-You want to know about their needs and how can we offer them a better solution for their challenges.
+You want to understand their needs and explore how we can offer a better solution to their challenges.
 
-Write a short, concise, max 4 to 5 paragraphs.
+Write a short, concise email, max 4–5 paragraphs.
 
-Find some projects his company is working on. Propose some applications they can have beneficial for our images.
+Find some projects their company is working on. Propose potential applications where our imagery could be beneficial.
 
-Mention very clear that we are calling from the innovation arm of Lufthansa called the Lufthansa Innovation Hub.
+Make it very clear that we are reaching out from the innovation arm of Lufthansa, called the Lufthansa Innovation Hub.
 
-Mention our tag line:
+Include our tagline:
 
-"Lufthansa is transforming aerial observation: daily, high-resolution imagery spanning 95% of Germany and 50% of Europe, with industry-leading 50 cm GSD—delivered at the lowest price per km².""
+"Lufthansa is transforming aerial observation: daily, high-resolution imagery spanning 95% of Germany and 50% of Europe, with industry-leading 50 cm GSD—delivered at the lowest price per km²."
 
-We are right now in the process of spinning it out and we are reaching with potential partners that can benefit of framing our solution together.
+Note: We are currently in the process of spinning out this business and are reaching out to potential partners who could benefit from shaping the solution with us.
 
-Genuine curiosity about their challenges, not selling.
+Approach with genuine curiosity about their challenges—this is not a sales pitch.
 
-If the person is not the right person ask him to redirect us to the right one.
+If the person is not the right contact, ask them to kindly redirect us to the correct one.
 
-Use soft, formal professional language.
+Use soft, formal, professional language.
 
-We are asking for 30mins talk.
+We are asking for a 30-minute conversation.
 
-Suggest a subject that generates trust and curiosity. Include Lufthansa in the subject.
+Suggest a subject line that builds trust and curiosity, and includes Lufthansa.
 
-Call to Action: let us know if you are open for a short call
+Call to Action: ask if they are open to a short call.
 
-For each contact generate a plausible email address. Try to infer it from the email structure of other emails that are public for this company.
+For each contact, generate a plausible email address by inferring it from the public email structure of other addresses at their company.
