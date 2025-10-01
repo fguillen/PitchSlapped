@@ -37,16 +37,9 @@ class EmailGenerator
   private
 
   def setup_client
-    # Configure RubyLLM
     RubyLLM.configure do |config|
-      if @api_key.start_with?("sk-")
-        config.openai_api_key = @api_key
-      elsif @api_key.start_with?("sk-ant-")
-        config.anthropic_api_key = @api_key
-      else
-        # Try OpenAI as default
-        config.openai_api_key = @api_key
-      end
+      config.openrouter_api_key = @api_key
+      config.default_model = "perplexity/sonar"
     end
 
     @client = RubyLLM.chat
@@ -185,25 +178,18 @@ end
 # Main execution
 if __FILE__ == $PROGRAM_NAME
   # Configuration
-  api_key = ENV["OPENAI_API_KEY"] || ENV["ANTHROPIC_API_KEY"] || ENV["GEMINI_API_KEY"]
+  api_key = ENV["OPEN_ROUTER_API_KEY"]
   csv_file = ARGV[0] || "contacts.csv"
   output_file = ARGV[1] || "generated_emails.md"
   prompt_file = "prompt.md"
 
-  if api_key.nil?
-    puts "Error: Please set one of the following environment variables:"
-    puts "  - OPENAI_API_KEY"
-    puts "  - ANTHROPIC_API_KEY"
-    puts "  - GEMINI_API_KEY"
-    exit 1
-  end
-
-  generator = EmailGenerator.new(
-    api_key: api_key,
-    csv_file: csv_file,
-    output_file: output_file,
-    prompt_file: prompt_file
-  )
+  generator =
+    EmailGenerator.new(
+      api_key: api_key,
+      csv_file: csv_file,
+      output_file: output_file,
+      prompt_file: prompt_file
+    )
 
   generator.generate_emails
 end
