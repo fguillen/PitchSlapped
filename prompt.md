@@ -5,9 +5,12 @@ Write an email to this prospect:
 - COMPANY_NAME: [COMPANY_NAME]
 - INDUSTRY: [INDUSTRY]
 - CONTACT_NAME: [CONTACT_NAME]
+- CONTACT_POSITION: [CONTACT_POSITION]
 - CONTACT_LINKEDIN: [CONTACT_LINKEDIN]
 
 You are interested in the projects they are working on in relation to geospatial imagery.
+
+For the introduction you can mention that your name is Fernando Guillén Suárez, and you are also adding in CC to you college Benedikt Tostmann.
 
 You want to understand their needs and explore how we can offer a better solution to their challenges.
 

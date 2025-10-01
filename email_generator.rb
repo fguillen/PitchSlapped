@@ -23,12 +23,13 @@ class EmailGenerator
       company_name: { type: 'string' },
       industry: { type: 'string' },
       contact_name: { type: 'string' },
+      contact_position: { type: 'string' },
       contact_linkedin: { type: 'string' },
       inferred_email: { type: 'string' },
       subject: { type: 'string' },
       body: { type: 'string' }
     },
-    required: %w[company_name industry contact_name contact_linkedin inferred_email subject body],
+    required: %w[company_name industry contact_name contact_position contact_linkedin inferred_email subject body],
     additionalProperties: false
   }.freeze
 
@@ -52,7 +53,7 @@ class EmailGenerator
   def setup_client
     RubyLLM.configure do |config|
       config.openrouter_api_key = @api_key
-      config.default_model = "perplexity/sonar"
+      config.default_model = "google/gemini-2.5-flash" #"perplexity/sonar"
     end
 
     @client = RubyLLM.chat
@@ -92,8 +93,10 @@ class EmailGenerator
         .gsub("[COMPANY_NAME]", row["company_name"])
         .gsub("[INDUSTRY]", row["industry"])
         .gsub("[CONTACT_NAME]", row["contact_name"])
+        .gsub("[CONTACT_POSITION]", row["contact_position"])
         .gsub("[CONTACT_LINKEDIN]", row["contact_linkedin"])
 
+    puts "Generated prompt:\n#{personalized_prompt}\n\n"
     response = @client.with_schema(EMAIL_RESPONSE_SCHEMA).ask(personalized_prompt)
     response.content
   end
@@ -103,6 +106,7 @@ class EmailGenerator
     output.puts "- **Company:** #{email_data["company_name"]}"
     output.puts "- **Industry:** #{email_data["industry"]}"
     output.puts "- **Contact:** #{email_data["contact_name"]}"
+    output.puts "- **Position:** #{email_data["contact_position"]}"
     output.puts "- **LinkedIn:** #{email_data["contact_linkedin"]}"
     output.puts "- **Inferred Email:** #{email_data["inferred_email"]}\n"
 
