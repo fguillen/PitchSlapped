@@ -7,16 +7,12 @@ This script generates personalized intro emails using the RubyLLM gem and data f
 - Reads contact information from CSV files
 - Uses RubyLLM to generate personalized emails with AI
 - Supports OpenAI, Anthropic, and other LLM providers
-- Outputs formatted markdown files with generated emails
-- Built-in error handling and validation
+- Outputs formatted markdown file with generated emails
 
 ## Prerequisites
 
 - Ruby (version 2.7 or higher)
-- An API key for one of the supported LLM providers:
-  - OpenAI API key (starts with `sk-`)
-  - Anthropic API key (starts with `sk-ant-`)
-  - Or other supported providers
+- An API key for OpenRouter
 
 ## Installation
 
@@ -24,14 +20,13 @@ The script uses bundler/inline to manage dependencies automatically. No separate
 
 ## Setup
 
-1. **Set your API key** as an environment variable:
-   ```bash
-   export OPENAI_API_KEY="your-openai-api-key"
-   # OR
-   export ANTHROPIC_API_KEY="your-anthropic-api-key"
+1. **Set your OpenRouter API key** on the `.env` file:
+   ```
+   #.env
+   OPEN_ROUTER_API_KEY="your-openrouter-api-key"
    ```
 
-2. **Prepare your CSV file** with the following columns:
+2. **Prepare your CSV file** in the path `data/contacts.csv` with the following columns:
    - `company_name`: Name of the company
    - `industry`: Industry/sector of the company
    - `contact_name`: Name of the contact person
@@ -46,14 +41,9 @@ The script uses bundler/inline to manage dependencies automatically. No separate
 ruby email_generator.rb
 ```
 This will use the default files:
-- Input: `contacts.csv`
-- Output: `generated_emails.md`
+- Input: `data/contacts.csv`
+- Output: `data/generated_emails_TIMESTAMP.md`
 - Prompt: `prompt.md`
-
-### Custom Files
-```bash
-ruby email_generator.rb my_contacts.csv my_output.md
-```
 
 ### Example CSV Format
 ```csv
@@ -63,8 +53,6 @@ company_name,industry,contact_name,contact_linkedin
 ```
 
 ## Output Format
-
-The script now requests structured JSON responses from the LLM and generates a markdown file with the following structure for each contact:
 
 ```markdown
 # Email to: [Contact Name]
@@ -81,56 +69,6 @@ The script now requests structured JSON responses from the LLM and generates a m
 
 ---
 ```
-
-### Structured Response Schema
-The script uses RubyLLM's Schema feature with a hash-based schema definition to ensure consistent, structured responses from the LLM:
-
-```ruby
-EMAIL_RESPONSE_SCHEMA = {
-  type: 'object',
-  properties: {
-    company_name: { type: 'string' },
-    industry: { type: 'string' },
-    contact_name: { type: 'string' },
-    contact_linkedin: { type: 'string' },
-    inferred_email: { type: 'string' },
-    subject: { type: 'string' },
-    body: { type: 'string' }
-  },
-  required: %w[company_name industry contact_name contact_linkedin inferred_email subject body],
-  additionalProperties: false
-}
-```
-
-This guarantees that each response contains all required fields in the correct format, eliminating parsing errors and ensuring data consistency.
-
-## Configuration
-
-The script automatically detects your API provider based on the key format:
-- Keys starting with `sk-` are treated as OpenAI keys
-- Keys starting with `sk-ant-` are treated as Anthropic keys
-- Other formats default to OpenAI
-
-## Error Handling
-
-The script includes comprehensive error handling:
-- Validates file existence before processing
-- Checks for required CSV columns
-- Handles API errors gracefully
-- Provides detailed success/error summaries
-
-## Troubleshooting
-
-1. **"API key not found"**: Make sure you've set one of the environment variables
-2. **"CSV file not found"**: Check that your CSV file exists and the path is correct
-3. **"Missing placeholders"**: Ensure your `prompt.md` contains the required placeholders
-4. **API errors**: Check your API key and account balance
-
-## Sample Files
-
-- `contacts.csv`: Sample CSV with test data
-- `prompt.md`: Template prompt for email generation
-- `email_generator.rb`: Main script
 
 ## License
 

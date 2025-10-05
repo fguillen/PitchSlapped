@@ -120,8 +120,8 @@ end
 if __FILE__ == $PROGRAM_NAME
   # Configuration
   api_key = ENV["OPEN_ROUTER_API_KEY"]
-  csv_file = ARGV[0] || "data/contacts.csv"
-  output_file = ARGV[1] || "data/generated_emails_#{Time.now.strftime('%Y%m%d_%H%M%S')}.md"
+  csv_file = "data/contacts.csv"
+  output_file = "data/generated_emails_#{Time.now.strftime('%Y%m%d_%H%M%S')}.md"
   prompt_file = "prompt.md"
 
   generator =
