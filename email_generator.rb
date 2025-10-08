@@ -122,7 +122,7 @@ if __FILE__ == $PROGRAM_NAME
   api_key = ENV["OPEN_ROUTER_API_KEY"]
   csv_file = "data/contacts.csv"
   output_file = "data/generated_emails_#{Time.now.strftime('%Y%m%d_%H%M%S')}.md"
-  prompt_file = "prompt.md"
+  prompt_file = ENV["PROMPT_FILE_PATH"] || "prompt.md"
 
   generator =
     EmailGenerator.new(

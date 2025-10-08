@@ -1,3 +1,4 @@
 .env
 data/*
+!data/contacts.example.csv
 !data/.gitkeep
