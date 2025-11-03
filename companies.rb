@@ -38,7 +38,7 @@ class CompaniesGenerator < Generator
     end
   end
 
-  def initialize(prompt_path:, industry:, output_dir_path: "results", model: "openai/gpt-5")
+  def initialize(prompt_path:, industry:, output_dir_path: "results", model: "perplexity/sonar-pro-search")
     super(prompt_path:, output_dir_path:, model:)
     @industry = industry
   end

@@ -10,6 +10,7 @@ class Generator
   def initialize(prompt_path:, output_dir_path:, model: "google/gemini-2.5-pro")
     RubyLLM.configure do |config|
       config.openrouter_api_key = ENV["OPENROUTER_API_KEY"]
+      config.model_registry_file = "#{__dir__}/tmp/models_registry.json"
       config.log_file = "#{File.dirname(__FILE__)}/logs/ruby_llm.log"
       config.log_level = :debug
     end
