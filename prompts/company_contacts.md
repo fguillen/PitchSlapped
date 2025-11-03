@@ -1,6 +1,4 @@
-For all these companies:
-
-[COMPANY_NAMES]
+For this company: [COMPANY_NAME]
 
 Find me the best 1 to 3 contacts leading projects in Earth Observation, GIS, and Geospatial, as we want their expertise and opinions to help us build the Earth Observation platform.
 

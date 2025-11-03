@@ -38,7 +38,7 @@ class Generator
 
   def save_completion(content)
     Dir.mkdir(@output_dir_path) unless Dir.exist?(@output_dir_path)
-    final_output_path = File.join(@output_dir_path, "#{self.class.name.downcase}_#{@industry.downcase.gsub(" ", "_")}_#{Time.now.to_i}.json")
+    final_output_path = File.join(@output_dir_path, "#{self.class.name.downcase}_#{Time.now.to_i}.json")
     puts "Saving completion to #{final_output_path}"
     File.write(final_output_path, JSON.pretty_generate(content))
   end
