@@ -65,7 +65,6 @@ class EmailGenerator
 
   def process_csv_file
     processed_count = 0
-    error_count = 0
 
     # Initialize output markdown file
     File.open(@output_file, "w") do |output|
