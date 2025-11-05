@@ -10,6 +10,10 @@ class CompanyContactsGenerator < Generator
           string
           null
         end
+        any_of :industry, description: "Industry the company operates in" do
+          string
+          null
+        end
         any_of :name, description: "Name of the contact person" do
           string
           null
@@ -38,14 +42,16 @@ class CompanyContactsGenerator < Generator
     end
   end
 
-  def initialize(prompt_path:, company_name:, output_dir_path: "results", model: "openai/gpt-4o:online")
-    super(prompt_path:, output_dir_path:, model:)
+  def initialize(prompt_path:, company_name:, industry:, model: "openai/gpt-4o:online")
+    super(prompt_path:, model:)
     @company_name = company_name
+    @industry = industry
   end
 
   def build_prompt
-    @prompt = File.read(@prompt_path).gsub("[COMPANY_NAME]", @company_name)
-    @prompt
+    @built_prompt ||= File.read(@prompt_path)
+      .gsub("[COMPANY_NAME]", @company_name)
+      .gsub("[INDUSTRY]", @industry)
   end
 
   def self.output_schema
@@ -55,15 +61,16 @@ end
 
 # Main execution
 def main
-  if ARGV.length < 1
-    puts "Error: Required arguments required: company_name"
+  if ARGV.length < 2
+    puts "Error: Required arguments required: company_name, industry"
     exit(1)
   end
 
   generator =
     CompanyContactsGenerator.new(
-      prompt_path: "#{__dir__}/prompts/company_contacts.md",
+      prompt_path: "#{__dir__}/../prompts/company_contacts.md",
       company_name: ARGV[0],
+      industry: ARGV[1]
     )
   generator.completion
 end

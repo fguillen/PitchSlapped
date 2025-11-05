@@ -26,7 +26,7 @@ end
 def main
   generator =
     LastHackerNewGenerator.new(
-      prompt_path: "#{__dir__}/prompts/last_hacker_new.md"
+      prompt_path: "#{__dir__}/../prompts/last_hacker_new.md"
     )
   generator.completion
 end

@@ -1,4 +1,7 @@
-For this company: [COMPANY_NAME]
+For this company:
+
+- COMPANY_NAME: [COMPANY_NAME]
+- INDUSTRY: [INDUSTRY]
 
 Find me the best 1 to 3 contacts leading projects in Earth Observation, GIS, and Geospatial, as we want their expertise and opinions to help us build the Earth Observation platform.
 
@@ -7,6 +10,7 @@ For companies that couldn't find contacts related to GIS, geospatial, and Earth 
 With the contacts collect the requested fields:
 
 Company Name
+Industry
 Contact Name
 Contact Position
 Contact LinkedIn

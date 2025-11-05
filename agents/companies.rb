@@ -38,8 +38,8 @@ class CompaniesGenerator < Generator
     end
   end
 
-  def initialize(prompt_path:, industry:, output_dir_path: "results", model: "perplexity/sonar-pro-search")
-    super(prompt_path:, output_dir_path:, model:)
+  def initialize(prompt_path:, industry:, model: "perplexity/sonar-pro-search")
+    super(prompt_path:, model:)
     @industry = industry
   end
 
@@ -63,7 +63,7 @@ def main
 
   generator =
     CompaniesGenerator.new(
-      prompt_path: "#{__dir__}/prompts/companies.md",
+      prompt_path: "#{__dir__}/../prompts/companies.md",
       industry: ARGV[0],
     )
   generator.completion

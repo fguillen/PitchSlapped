@@ -1,8 +1,3 @@
 .env
-data/*
-!data/contacts.example.csv
-!data/.gitkeep
 results/*
 !results/.gitkeep
-logs/*
-!logs/.gitkeep

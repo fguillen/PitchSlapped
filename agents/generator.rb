@@ -7,11 +7,15 @@ require "dotenv/load"
 require "debug"
 
 class Generator
-  def initialize(prompt_path:, output_dir_path:, model: "google/gemini-2.5-pro")
+  def initialize(
+    prompt_path:,
+    output_dir_path: "#{__dir__}/../results",
+    model: "google/gemini-2.5-pro"
+  )
     RubyLLM.configure do |config|
       config.openrouter_api_key = ENV["OPENROUTER_API_KEY"]
-      config.model_registry_file = "#{__dir__}/tmp/models_registry.json"
-      config.log_file = "#{File.dirname(__FILE__)}/logs/ruby_llm.log"
+      config.model_registry_file = "#{__dir__}/../tmp/models_registry.json"
+      config.log_file = "#{File.dirname(__FILE__)}/../logs/ruby_llm.log"
       config.log_level = :debug
     end
 
@@ -34,12 +38,14 @@ class Generator
   end
 
   def build_prompt
-    @prompt
+    @built_prompt ||=
+      File.read(@prompt_path)
   end
 
   def save_completion(content)
     Dir.mkdir(@output_dir_path) unless Dir.exist?(@output_dir_path)
-    final_output_path = File.join(@output_dir_path, "#{self.class.name.downcase}_#{Time.now.to_i}.json")
+    time_stamp = Time.now.strftime("%Y%m%d_%H%M%S")
+    final_output_path = File.join(@output_dir_path, "#{self.class.name.downcase}_#{time_stamp}.json")
     puts "Saving completion to #{final_output_path}"
     File.write(final_output_path, JSON.pretty_generate(content))
   end
