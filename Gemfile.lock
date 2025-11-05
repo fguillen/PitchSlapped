@@ -2,6 +2,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     base64 (0.3.0)
+    commonmarker (2.5.0)
+      rb_sys (~> 0.9)
     date (3.5.0)
     debug (1.11.0)
       irb (~> 1.10)
@@ -26,23 +28,42 @@ GEM
       reline (>= 0.4.2)
     json (2.15.2)
     logger (1.7.0)
+    mail (2.9.0)
+      logger
+      mini_mime (>= 0.1.1)
+      net-imap
+      net-pop
+      net-smtp
     marcel (1.1.0)
+    mini_mime (1.1.5)
     multipart-post (2.4.1)
     net-http (0.7.0)
       uri
+    net-imap (0.5.12)
+      date
+      net-protocol
+    net-pop (0.1.2)
+      net-protocol
+    net-protocol (0.2.2)
+      timeout
+    net-smtp (0.5.1)
+      net-protocol
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
     psych (5.2.6)
       date
       stringio
+    rake-compiler-dock (1.9.1)
+    rb_sys (0.9.117)
+      rake-compiler-dock (= 1.9.1)
     rdoc (6.15.1)
       erb
       psych (>= 4.0.0)
       tsort
     reline (0.6.2)
       io-console (~> 0.5)
-    ruby_llm (1.9.0)
+    ruby_llm (1.9.1)
       base64
       event_stream_parser (~> 1)
       faraday (>= 1.10.0)
@@ -54,8 +75,9 @@ GEM
       zeitwerk (~> 2)
     ruby_llm-schema (0.2.1)
     stringio (3.1.7)
+    timeout (0.4.4)
     tsort (0.2.0)
-    uri (1.1.0)
+    uri (1.1.1)
     zeitwerk (2.7.3)
 
 PLATFORMS
@@ -63,8 +85,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  commonmarker
   debug
   dotenv
+  mail
   ruby_llm
 
 BUNDLED WITH

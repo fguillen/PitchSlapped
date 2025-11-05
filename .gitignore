@@ -1,3 +1,4 @@
 .env
 results/*
 !results/.gitkeep
+scripts/email_signature.html
