@@ -59,7 +59,7 @@ module Agent
     end
 
     def timestamp
-      Time.now.strftime("%Y-%m-%d %H:%M:%S")
+      Time.now.strftime("%Y%m%d_%H%M%S")
     end
   end
 end

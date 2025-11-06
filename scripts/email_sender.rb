@@ -25,18 +25,22 @@ class EmailSender
 
   def initialize(
     from_name:,
-    from_email:,
     to_name:,
     to_email:,
     subject:,
-    body:
+    body:,
+    signature: nil,
+    cc_email: nil,
+    bcc_email: nil
   )
     @from_name = from_name
-    @from_email = from_email
     @to_name = to_name
     @to_email = to_email
     @subject = subject
     @body = body
+    @signature = signature
+    @cc_email = cc_email
+    @bcc_email = bcc_email
 
     configure_mail_connection
     @email = build_email
@@ -63,11 +67,18 @@ class EmailSender
   end
 
   def build_email
-    from_value = "#{@from_name} <#{@from_email}>"
+    from_value = "#{@from_name} <#{ENV["GMAIL_ACCOUNT"]}>"
     to_value = "#{@to_name} <#{@to_email}>"
     subject_value = @subject
     body_value = Commonmarker.to_html("#{@body} \n\n--\n")
-    body_value += File.read("#{__dir__}/email_signature.html") if File.exist?("#{__dir__}/email_signature.html")
+    cc_email = @cc_email
+    bcc_email = @bcc_email
+
+    if @signature
+      body_value += @signature
+    end
+
+    puts "bcc: #{@bcc_email}"
 
     Mail.new do
       from from_value
@@ -75,6 +86,8 @@ class EmailSender
       subject subject_value
       content_type "text/html; charset=UTF-8"
       body body_value
+      cc cc_email if cc_email
+      bcc bcc_email if bcc_email
     end
   end
 end

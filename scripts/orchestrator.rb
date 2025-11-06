@@ -62,7 +62,7 @@ class Orchestrator
           contact_name: contact_name,
           contact_position: contact["position"] || "N/A",
           contact_linkedin: contact["linkedin_url"] || "N/A",
-          contact_email: contact["email"] || "N/A",
+          contact_email: contact["email"] || contact["inferred_email"] || "N/A",
           contact_projects: contact["projects"] || "N/A",
           output_dir_path: "#{@output_dir_path}/email_drafts/#{sanitize_for_filename(company_name)}_#{sanitize_for_filename(contact_name)}"
         )
