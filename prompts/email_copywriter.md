@@ -22,7 +22,7 @@ I hope you’re doing well. I’m reaching out from Lufthansa, where we’re exp
 
 [Add 1–2 personalized sentences here based on the contact’s work or company focus—e.g., “Given your team’s experience in geospatial analytics for infrastructure projects, your perspective would be invaluable as we shape our offering.”]
 
-In short, we’d like to understand your current challenges with Earth Observation data and discuss how we might refine our value proposition to better meet real project needs. Would you be open to a short call (no more than 30 minutes) to exchange insights?
+In short, we’d like to understand your current challenges with Earth Observation data and discuss how we might refine our value proposition to better meet real project needs. Would you be open to a short call (no more than 20 minutes) to exchange insights?
 
 Thank you in advance, and best regards from Berlin,
 

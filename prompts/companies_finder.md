@@ -1,4 +1,4 @@
-Identify and summarize the top 20 companies in the [INDUSTRY] sector.
+Identify and summarize the top [NUM_COMPANIES] companies in the [INDUSTRY] sector.
 
 For each company, complete the requested information
 

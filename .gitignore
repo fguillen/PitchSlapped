@@ -1,4 +1,9 @@
 .env
+logs/*
+!logs/.gitkeep
 results/*
 !results/.gitkeep
+tmp/*
+!tmp/.gitkeep
+.vscode/
 scripts/email_signature.html
