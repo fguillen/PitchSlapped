@@ -7,6 +7,7 @@ RubyLLM.configure do |config|
 end
 
 RubyLLM.models.refresh!
+FileUtils.mkdir_p("#{__dir__}/../tmp")
 RubyLLM.models.save_to_json
 
 
