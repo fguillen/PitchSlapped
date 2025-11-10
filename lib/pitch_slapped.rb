@@ -11,6 +11,8 @@ require_relative "agents/companies_finder"
 require_relative "agents/company_contacts_finder"
 require_relative "agents/email_copywriter"
 
+require_relative "orchestrator"
+
 module PitchSlapped
   VERSION = "0.1.0"
 end

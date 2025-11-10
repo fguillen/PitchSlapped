@@ -1,7 +1,3 @@
-require_relative "../agents/companies_finder"
-require_relative "../agents/company_contacts_finder"
-require_relative "../agents/email_copywriter"
-
 module PitchSlapped
   class Orchestrator
     def initialize(
