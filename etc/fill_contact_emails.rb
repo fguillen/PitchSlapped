@@ -1,5 +1,4 @@
-require "json"
-require "debug"
+require_relative "../lib/pitch_slapped"
 
 class FillContactEmails
   def self.run
@@ -23,7 +22,7 @@ class FillContactEmails
   end
 
   def self.load_all_company_contacts
-    contacts_file_paths = Dir.glob(File.join("#{PitchSlapped::Utils.root_dir}/results/orchestrator_20251106_144810/company_contacts", "**", "*.json"))
+    contacts_file_paths = Dir.glob(File.join("#{PitchSlapped::Utils.root_dir}/results/orchestrator_20251110_144616/company_contacts", "**", "*.json"))
     contacts_file_paths.flat_map do |contact_path|
       content = File.read(contact_path)
       JSON.parse(content)["company_contacts"]

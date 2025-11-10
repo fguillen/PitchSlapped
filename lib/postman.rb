@@ -10,17 +10,17 @@ module PitchSlapped
     )
       @email_drafts_dir_path = email_drafts_dir_path
       @from_name = from_name
-      @cc_email = cc_email.empty? ? nil : cc_email
-      @bcc_email = bcc_email.empty? ? nil : bcc_email
+      @cc_email = (cc_email.nil? || cc_email.empty?) ? nil : cc_email
+      @bcc_email = (bcc_email.nil? || bcc_email.empty?) ? nil : bcc_email
     end
 
     def send_emails
       email_drafts_file_paths = Dir.glob(File.join(@email_drafts_dir_path, "**", "*.json"))
-      email_drafts_file_paths[13..].each_with_index do |draft_path, index|
+      email_drafts_file_paths.each_with_index do |draft_path, index|
         puts "Processing draft[#{index}]: #{draft_path}"
         email_content = File.read(draft_path)
         email_hash = JSON.parse(email_content)
-        signature = File.exist?("#{__dir__}/email_signature.html") ? File.read("#{__dir__}/email_signature.html") : nil
+        signature = File.exist?("#{Utils.root_dir}/data/email_signature.html") ? File.read("#{Utils.root_dir}/data/email_signature.html") : nil
 
         email_sender =
           EmailSender.new(

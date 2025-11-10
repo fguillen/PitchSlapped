@@ -1,4 +1,5 @@
 require_relative "pitch_slapped"
+require "mail"
 
 module PitchSlapped
   class EmailSender
@@ -58,8 +59,6 @@ module PitchSlapped
       if @signature
         body_value += @signature
       end
-
-      puts "bcc: #{@bcc_email}"
 
       Mail.new do
         from from_value

@@ -26,6 +26,6 @@ In short, we’d like to understand your current challenges with Earth Observati
 
 Thank you in advance, and best regards from Berlin,
 
-- Fernando
+\-Fernando
 
 P.S. If a colleague would be more suitable for this discussion, I’d appreciate it if you could forward this note.
