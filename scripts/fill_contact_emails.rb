@@ -32,7 +32,10 @@ class FillContactEmails
 
   def self.email_for_contact(contact_name, company_name)
     contact = @all_companys_contacts.find { |e| e["company_name"] == company_name && e["name"] == contact_name }
-    debugger if contact.nil?
+    contact_email(contact)
+  end
+
+  def self.contact_email(contact)
     (contact["email"].nil? || contact["email"].empty?) ? contact["inferred_email"] : contact["email"]
   end
 end
