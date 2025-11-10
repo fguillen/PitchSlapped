@@ -18,7 +18,8 @@ module PitchSlapped
           config.log_level = :debug
         end
 
-        @chat = RubyLLM.chat(model:).with_schema(self.class.output_schema).with_temperature(0)
+        @chat = RubyLLM.chat(model:)
+        @chat = @chat.with_schema(output_schema) if output_schema
         @industry = industry
         @prompt_path = prompt_path
         @output_dir_path = output_dir_path
@@ -50,8 +51,12 @@ module PitchSlapped
       end
 
       def log(message)
+        final_message = "[#{timestamp}] [#{self.class.name}] #{message}"
+
+        puts final_message
+
         File.open("#{PitchSlapped::Utils.root_dir}/logs/agents.log", "a") do |file|
-          file.puts "[#{timestamp}] [#{self.class.name}] #{message}"
+          file.puts final_message
         end
       end
 

@@ -6,7 +6,7 @@ module PitchSlapped
       class OutputSchema < RubyLLM::Schema
         array :companies do
           object :company do
-            any_of :name, description: "Name of the company" do
+            any_of :name, description: "Official Full Name of the company, including entity type eg GmbH, AG, Inc." do
               string
               null
             end
@@ -42,9 +42,10 @@ module PitchSlapped
         industry:,
         num_companies: 10,
         exclude_companies: [],
+        output_dir_path: "#{PitchSlapped::Utils.root_dir}/results/#{PitchSlapped::Utils.sanitize(industry)}",
         model: "perplexity/sonar-pro-search"
       )
-        super(model:, industry:)
+        super(model:, industry:, output_dir_path:)
         @industry = industry
         @num_companies = num_companies
         @exclude_companies = exclude_companies
@@ -56,10 +57,6 @@ module PitchSlapped
             .gsub("[INDUSTRY]", @industry)
             .gsub("[NUM_COMPANIES]", @num_companies.to_s)
             .gsub("[EXCLUDE_COMPANIES]", @exclude_companies.join(", "))
-      end
-
-      def self.output_schema
-        OutputSchema
       end
     end
   end
