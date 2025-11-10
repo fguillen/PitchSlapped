@@ -27,7 +27,7 @@ module Agent
   def main
     agent =
       LastHackerNewGenerator.new(
-        prompt_path: "#{__dir__}/../prompts/last_hacker_new.md"
+        prompt_path: "#{PitchSlapped::Utils.root_dir}/prompts/last_hacker_new.md"
       )
     agent.completion
   end

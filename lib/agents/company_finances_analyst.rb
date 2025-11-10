@@ -13,8 +13,8 @@ module Agent
     def initialize(
       company_name:,
       industry:,
-      prompt_path: "#{__dir__}/../prompts/company_finances_analyst.md",
-      output_dir_path: "#{__dir__}/../results",
+      prompt_path: "#{PitchSlapped::Utils.root_dir}/prompts/company_finances_analyst.md",
+      output_dir_path: "#{PitchSlapped::Utils.root_dir}/results",
       model: "perplexity/sonar-pro-search"
     )
       super(prompt_path:, output_dir_path:, model:)

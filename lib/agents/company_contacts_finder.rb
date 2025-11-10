@@ -32,11 +32,11 @@ module Agent
     end
 
     def initialize(
-      prompt_path: "#{__dir__}/../prompts/company_contacts_finder.md",
+      prompt_path: "#{PitchSlapped::Utils.root_dir}/prompts/company_contacts_finder.md",
       company_name:,
       industry:,
       num_contacts: 3,
-      output_dir_path: "#{__dir__}/../results",
+      output_dir_path: "#{PitchSlapped::Utils.root_dir}/results",
       model: "perplexity/sonar-pro-search"
     )
       super(prompt_path:, model:, output_dir_path:)

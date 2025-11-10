@@ -6,4 +6,6 @@ results/*
 tmp/*
 !tmp/.gitkeep
 .vscode/
-scripts/email_signature.html
+data/email_signature.html
+data/already_contacted_companies.txt
+data/already_contacted_contacts.txt

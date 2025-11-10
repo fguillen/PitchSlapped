@@ -6,7 +6,7 @@ class ExportContactList
   def self.run
     all_companys_contacts = load_all_company_contacts
 
-    csv_filename = "#{__dir__}/../results/exported_contacts_#{Time.now.strftime("%Y%m%d_%H%M%S")}.csv"
+    csv_filename = "#{PitchSlapped::Utils.root_dir}/results/exported_contacts_#{Time.now.strftime("%Y%m%d_%H%M%S")}.csv"
     CSV.open(csv_filename, "w", write_headers: false) do |csv|
       all_companys_contacts.each do |contact|
         csv << [
@@ -26,7 +26,7 @@ class ExportContactList
   end
 
   def self.load_all_company_contacts
-    contacts_file_paths = Dir.glob(File.join("#{__dir__}/../results/orchestrator_20251106_144810/company_contacts", "**", "*.json"))
+    contacts_file_paths = Dir.glob(File.join("#{PitchSlapped::Utils.root_dir}/results/orchestrator_20251106_144810/company_contacts", "**", "*.json"))
     contacts_file_paths.flat_map do |contact_path|
       content = File.read(contact_path)
       JSON.parse(content)["company_contacts"]

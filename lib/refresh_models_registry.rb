@@ -7,7 +7,7 @@ RubyLLM.configure do |config|
 end
 
 RubyLLM.models.refresh!
-FileUtils.mkdir_p("#{__dir__}/../tmp")
+FileUtils.mkdir_p("#{PitchSlapped::Utils.root_dir}/tmp")
 RubyLLM.models.save_to_json
 
 

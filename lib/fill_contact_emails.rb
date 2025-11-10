@@ -4,7 +4,7 @@ require "debug"
 class FillContactEmails
   def self.run
     @all_companys_contacts = load_all_company_contacts
-    email_drafts_file_paths = Dir.glob(File.join("#{__dir__}/../results/orchestrator_20251106_144810/email_drafts", "**", "*.json"))
+    email_drafts_file_paths = Dir.glob(File.join("#{PitchSlapped::Utils.root_dir}/results/orchestrator_20251106_144810/email_drafts", "**", "*.json"))
     email_drafts_file_paths.each do |draft_path|
       puts "Processing draft: #{draft_path}"
 
@@ -23,7 +23,7 @@ class FillContactEmails
   end
 
   def self.load_all_company_contacts
-    contacts_file_paths = Dir.glob(File.join("#{__dir__}/../results/orchestrator_20251106_144810/company_contacts", "**", "*.json"))
+    contacts_file_paths = Dir.glob(File.join("#{PitchSlapped::Utils.root_dir}/results/orchestrator_20251106_144810/company_contacts", "**", "*.json"))
     contacts_file_paths.flat_map do |contact_path|
       content = File.read(contact_path)
       JSON.parse(content)["company_contacts"]

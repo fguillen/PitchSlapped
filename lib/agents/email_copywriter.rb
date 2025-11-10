@@ -13,7 +13,7 @@ module Agent
     end
 
     def initialize(
-      prompt_path: "#{__dir__}/../prompts/email_copywriter.md",
+      prompt_path: "#{PitchSlapped::Utils.root_dir}/prompts/email_copywriter.md",
       model: "perplexity/sonar-pro-search",
       company_name:,
       industry:,
@@ -22,7 +22,7 @@ module Agent
       contact_linkedin:,
       contact_email:,
       contact_projects:,
-      output_dir_path: "#{__dir__}/../results"
+      output_dir_path: "#{PitchSlapped::Utils.root_dir}/results"
     )
       super(prompt_path:, model:, output_dir_path:)
       @company_name = company_name
