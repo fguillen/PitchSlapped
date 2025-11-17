@@ -37,6 +37,8 @@ module PitchSlapped
         puts "Sending email..."
         puts email_sender.email.to_s
         email_sender.send_email
+        puts "Email sent to #{email_hash['email_address']}"
+        sleep 10 # To avoid hitting rate limits
       end
     end
   end
