@@ -17,6 +17,8 @@ def main
     )
 
   postman.send_emails
+
+  puts "All emails have been sent."
 end
 
 if __FILE__ == $0

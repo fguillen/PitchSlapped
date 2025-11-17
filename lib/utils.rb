@@ -22,5 +22,9 @@ module PitchSlapped
     def self.book_title_sanitized(book_title)
       PitchSlapped::Utils.sanitize(book_title)
     end
+
+    def self.if_empty(string, fallback)
+      string.nil? || string.strip.empty? ? fallback : string.strip
+    end
   end
 end

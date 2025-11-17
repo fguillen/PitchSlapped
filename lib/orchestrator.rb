@@ -55,16 +55,17 @@ module PitchSlapped
     def generate_email_drafts
       @companies_contacts.map do |contact|
         company_name = contact["company_name"]
-        contact_name = contact["name"] || "N/A"
+        contact_name = Utils.if_empty(contact["name"], "N/A")
+        contact_email = Utils.if_empty(contact["email"], contact["inferred_email"])
 
         agent_email_generator =
           Agent::EmailCopywriter.new(
-            company_name: company_name,
+            company_name:,
             industry: contact["industry"] || "N/A",
-            contact_name: contact_name,
+            contact_name:,
             contact_position: contact["position"] || "N/A",
             contact_linkedin: contact["linkedin_url"] || "N/A",
-            contact_email: contact["email"] || contact["inferred_email"] || "N/A",
+            contact_email:,
             contact_projects: contact["projects"] || "N/A",
             output_dir_path: "#{@output_dir_path}/email_drafts/#{sanitize_for_filename(company_name)}_#{sanitize_for_filename(contact_name)}"
           )
